@@ -49,32 +49,50 @@
   <div class="container-fluid">
     <div class="panel panel-primary" style="padding-top: 73px;">
       <div class="panel-heading">
-        <h1 class="text-primary font-weight-bold">{{ 'Employee List' | translate }}</h1>
+        <h1 class="text-primary font-weight-bold">{{ 'Patient List' | translate }}</h1>
       </div>
 
       <div class="row search-inputs p-1 justify-content-center g-3">
         <div class="col-sm-2">
-          <input type="text" name="name" [(ngModel)]="form.searchParams.name" class="form-control"
-            placeholder="{{ 'Enter name' | translate }}">
-          <span *ngIf="errorMessageName" class="alertRedColor">{{ errorMessageclientName }}</span>
+          <input type="text" name="fullName" [(ngModel)]="form.searchParams.fullName" class="form-control"
+            placeholder="{{ 'Enter full name' | translate }}">
+          <span *ngIf="errorMessageFullName" class="alertRedColor">{{ errorMessageFullName }}</span>
+        </div>
+
+        <div class="col-sm-2">
+          <input type="text" name="gender" [(ngModel)]="form.searchParams.gender" class="form-control"
+            placeholder="{{ 'Enter gender' | translate }}">
+          <span *ngIf="errorMessagegender" class="alertRedColor">{{ errorMessagegender }}</span>
+        </div>
+
+        <div class="col-sm-2">
+          <input type="number" name="Age" [(ngModel)]="form.searchParams.age" class="form-control"
+            placeholder="{{ 'Enter  age' | translate }}">
+          <span *ngIf="errorMessageage" class="alertRedColor">{{ errorMessageage}}</span>
+        </div>
+
+        <div class="col-sm-2">
+          <input type="text" name="phoneNumber" [(ngModel)]="form.searchParams.phoneNumber" class="form-control"
+            placeholder="{{ 'Enter  phone number' | translate }}">
+          <span *ngIf="errorMessagephoneNumber" class="alertRedColor">{{ errorMessagephoneNumber}}</span>
         </div>
 
         <div class="col-sm-2">
           <input type="text" name="address" [(ngModel)]="form.searchParams.address" class="form-control"
-            placeholder="{{ 'Enter address' | translate }}">
-          <span *ngIf="errorMessageaddress" class="alertRedColor">{{ errorMessagelocation }}</span>
+            placeholder="{{ 'Enter  address' | translate }}">
+          <span *ngIf="errorMessageaddress" class="alertRedColor">{{ errorMessageaddress}}</span>
         </div>
 
         <div class="col-sm-2">
-          <input type="text" name="post" [(ngModel)]="form.searchParams.post" class="form-control"
-            placeholder="{{ 'Enter  post' | translate }}">
-          <span *ngIf="errorMessagepost" class="alertRedColor">{{ errorMessagepost}}</span>
+          <input type="text" name="disease" [(ngModel)]="form.searchParams.disease" class="form-control"
+            placeholder="{{ 'Enter  disease' | translate }}">
+          <span *ngIf="errorMessagedisease" class="alertRedColor">{{ errorMessagedisease}}</span>
         </div>
 
         <div class="col-sm-2">
-          <input type="text" name="salary" [(ngModel)]="form.searchParams.salary" class="form-control"
-            placeholder="{{ 'Enter  salary' | translate }}">
-          <span *ngIf="errorMessagesalary" class="alertRedColor">{{ errorMessagesalary}}</span>
+          <input type="date" name="admissionDate" [(ngModel)]="form.searchParams.admissionDate" class="form-control"
+            placeholder="{{ 'Enter Admission Date' | translate }}">
+          <span *ngIf="errorMessageadmissionDate" class="alertRedColor">{{ errorMessageadmissionDate}}</span>
         </div>
 
         <div class="col-sm-1">
@@ -82,8 +100,8 @@
         </div>
 
         <div>
-          <button (click)="forward('/employee')" type="button" class="btn btn-success w-100">
-            {{ 'Add Employee' | translate }}
+          <button (click)="forward('/patient')" type="button" class="btn btn-success w-100">
+            {{ 'Add Patient' | translate }}
           </button>
         </div>
 
@@ -110,10 +128,13 @@
               <th><input type="checkbox" [(ngModel)]="isMasterSel" name="list_name"
                   (change)="checkUncheckAll($event)" /></th>
               <th>{{ 'S.No' | translate }}</th>
-              <th>{{ 'Name' | translate }}</th>
+              <th>{{ 'Full Name' | translate }}</th>
+              <th>{{ 'Gender' | translate }}</th>
+              <th>{{ 'Age' | translate }}</th>
+              <th>{{ 'Phone Number' | translate }}</th>
               <th>{{ 'Address' | translate }}</th>
-              <th>{{ 'Post' | translate }}</th>
-              <th>{{ 'Salary' | translate }}</th>
+              <th>{{ 'Disease' | translate }}</th>
+              <th>{{ 'Admission Date' | translate }}</th>
               <th>{{ 'Edit' | translate }}</th>
             </tr>
           </thead>
@@ -121,13 +142,16 @@
             <tr *ngFor="let m of form.list; let i = index" align="center">
               <td><input type="checkbox" #checkboxes (change)="checklistUpdate()" name="list_name" [id]="m.id" /></td>
               <td>{{ (form.pageNo * 5) + i + 1 }}</td>
-              <td>{{ m.name }}</td>
-              <td>{{ m.address }}</td>
-              <td>{{ m.post }}</td>
-              <td>{{m.salary}}</td>
+              <td>{{ m.fullName }}</td>
+              <td>{{ m.gender }}</td>
+              <td>{{ m.age }}</td>
+              <td>{{m.phoneNumber}}</td>
+               <td>{{ m.address }}</td>
+              <td>{{ m.disease }}</td>
+              <td>{{m.admissionDate}}</td>
 
               <td>
-                <button class="fa fa-edit text-primary" id="nnn" (click)="forward('/employee/' + m.id)">
+                <button class="fa fa-edit text-primary" id="nnn" (click)="forward('/patient/' + m.id)">
                 </button>
               </td>
             </tr>
@@ -139,13 +163,13 @@
             }}</button>
 
           <div>
-            <a class="btn btn-warning mr-1" [routerLink]="['/employeelist']" (click)="exit()">
+            <a class="btn btn-warning mr-1" [routerLink]="['/patientlist']" (click)="exit()">
               {{ 'Reset' | translate }}
             </a>
           </div>
 
           <div *ngIf="form.list.length == 0">
-            <a class="btn btn-warning mr-1" [routerLink]="['/employeelist']" (click)="exit()">
+            <a class="btn btn-warning mr-1" [routerLink]="['/patientlist']" (click)="exit()">
               {{ 'Back' | translate }}
             </a>
           </div>
