@@ -1,0 +1,107 @@
+package com.rays.dto;
+
+import java.util.Date;
+import java.util.LinkedHashMap;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.rays.common.BaseDTO;
+
+@Entity
+@Table(name = "ST_REPORT")
+public class ReportDTO extends BaseDTO {
+
+	@Column(name = "REPORT_ID")
+	private Long reportId;
+
+	@Column(name = "REPORT_NAME", length = 50)
+	private String reportName;
+
+	@Column(name = "GENERATED_DATE")
+	private Date generatedDate;
+
+	@Column(name = "GENERATED_BY", length = 50)
+	private String generatedBy;
+
+	@Column(name = "R", length = 50)
+	private String reportStatus;
+
+	public Long getReportId() {
+		return reportId;
+	}
+
+	public void setReportId(Long reportId) {
+		this.reportId = reportId;
+	}
+
+	public String getReportName() {
+		return reportName;
+	}
+
+	public void setReportName(String reportName) {
+		this.reportName = reportName;
+	}
+
+	public Date getGeneratedDate() {
+		return generatedDate;
+	}
+
+	public void setGeneratedDate(Date generatedDate) {
+		this.generatedDate = generatedDate;
+	}
+
+	public String getGeneratedBy() {
+		return generatedBy;
+	}
+
+	public void setGeneratedBy(String generatedBy) {
+		this.generatedBy = generatedBy;
+	}
+
+	public String getReportStatus() {
+		return reportStatus;
+	}
+
+	public void setReportStatus(String reportStatus) {
+		this.reportStatus = reportStatus;
+	}
+
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUniqueKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUniqueValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedHashMap<String, String> orderBY() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LinkedHashMap<String, Object> uniqueKeys() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

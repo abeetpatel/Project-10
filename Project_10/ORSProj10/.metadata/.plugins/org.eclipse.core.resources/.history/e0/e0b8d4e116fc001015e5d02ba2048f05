@@ -1,0 +1,19 @@
+package com.rays.form;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+
+public class ReportForm {
+
+	private Long reportId;
+
+	private String reportName;
+
+	private Date generatedDate;
+
+	private String generatedBy;
+
+	private String reportStatus;
+
+}

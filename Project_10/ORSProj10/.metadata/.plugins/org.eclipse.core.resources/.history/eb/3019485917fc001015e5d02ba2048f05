@@ -1,0 +1,69 @@
+package com.rays.form;
+
+import java.util.Date;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.rays.common.BaseForm;
+
+public class ReportForm extends BaseForm{
+
+	@NotNull(message = "please enter report id")
+	@Min(1)
+	private Long reportId;
+
+	@NotEmpty(message = "please enter password")
+	private String reportName;
+	
+	@NotNull(message = "please enter dob")
+	private Date generatedDate;
+
+	@NotEmpty(message = "please enter password")
+	private String generatedBy;
+
+	@NotEmpty(message = "please enter password")
+	private String reportStatus;
+
+	public Long getReportId() {
+		return reportId;
+	}
+
+	public void setReportId(Long reportId) {
+		this.reportId = reportId;
+	}
+
+	public String getReportName() {
+		return reportName;
+	}
+
+	public void setReportName(String reportName) {
+		this.reportName = reportName;
+	}
+
+	public Date getGeneratedDate() {
+		return generatedDate;
+	}
+
+	public void setGeneratedDate(Date generatedDate) {
+		this.generatedDate = generatedDate;
+	}
+
+	public String getGeneratedBy() {
+		return generatedBy;
+	}
+
+	public void setGeneratedBy(String generatedBy) {
+		this.generatedBy = generatedBy;
+	}
+
+	public String getReportStatus() {
+		return reportStatus;
+	}
+
+	public void setReportStatus(String reportStatus) {
+		this.reportStatus = reportStatus;
+	}
+
+}

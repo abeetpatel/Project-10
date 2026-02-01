@@ -1,0 +1,48 @@
+package com.rays.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import com.rays.common.BaseDAOImpl;
+import com.rays.dto.ReportDTO;
+
+public class ReportDAOImpl extends BaseDAOImpl<ReportDTO> implements ReportDAOInt {
+
+	@Override
+	protected List<Predicate> getWhereClause(ReportDTO dto, CriteriaBuilder builder, Root<ReportDTO> qRoot) {
+		
+		List<Predicate> whereCondition = new ArrayList<Predicate>();
+		
+		if (!isZeroNumber(dto.getReportId())) {
+
+			whereCondition.add(builder.equal(qRoot.get("reportId"), dto.getReportId()));
+		}
+		
+		if (!isEmptyString(dto.getReportName())) {
+
+			whereCondition.add(builder.like(qRoot.get("reportName"), dto.getReportName() + "%"));
+		}
+		
+		if (!isEmptyString(dto.getGeneratedBy())) {
+
+			whereCondition.add(builder.like(qRoot.get("generatedBy"), dto.getGeneratedBy() + "%"));
+		}
+		
+		if (!isEmptyString(dto.getReportStatus())) {
+
+			whereCondition.add(builder.like(qRoot.get("reportStatus"), dto.getReportStatus() + "%"));
+		}
+		
+		return whereCondition;
+	}
+
+	@Override
+	public Class<ReportDTO> getDTOClass() {
+		return ReportDTO.class;
+	}
+
+}

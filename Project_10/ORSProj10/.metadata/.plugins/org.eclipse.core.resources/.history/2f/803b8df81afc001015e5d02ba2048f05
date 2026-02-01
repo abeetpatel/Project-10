@@ -1,0 +1,9 @@
+package com.rays.service;
+
+import com.rays.common.BaseServiceImpl;
+import com.rays.dao.ReportDAOInt;
+import com.rays.dto.ReportDTO;
+
+public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDAOInt> implements ReportServiceInt{
+
+}
