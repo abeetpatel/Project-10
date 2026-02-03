@@ -4,22 +4,23 @@ import { ServiceLocatorService } from '../service-locator.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html'
+  selector: 'app-vehical',
+  templateUrl: './vehical.component.html'
 })
-export class ReportComponent extends BaseCtl{
+export class VehicalComponent  extends BaseCtl{
 
   constructor(public locator: ServiceLocatorService, public route: ActivatedRoute) {
-  super(locator.endpoints.REPORT, locator, route);
- }
+   super(locator.endpoints.VEHICAL, locator, route);
+  }
+
 
 
   populateForm(form, data) {
     form.id = data.id;
-    form.reportName = data.reportName;
-    form.generatedDate = data.generatedDate;
-    form.generatedBy = data.generatedBy;
-    form.reportStatus = data.reportStatus;
+    form.vehicalNo = data.vehicalNo;
+    form.bodyType = data.bodyType;
+    form.brand = data.brand;
+    form.purchaseDate = data.purchaseDate;
     console.log('Populated Form', form);
   }
 
@@ -29,5 +30,6 @@ export class ReportComponent extends BaseCtl{
     }
     return null;
   }
- 
+  
+
 }

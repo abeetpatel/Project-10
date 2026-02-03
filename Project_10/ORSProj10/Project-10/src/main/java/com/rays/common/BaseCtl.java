@@ -252,7 +252,11 @@ public abstract class BaseCtl<F extends BaseForm, T extends BaseDTO, S extends B
 				T existDto1 = (T) baseService.findByUniqueKey(dto.getUniqueKey(), dto.getUniqueValue(), userContext);
 				
 				System.out.println("existdto............"+ dto.getId() );
-				System.out.println("existdto............"+ existDto1.getId() ); 
+				if (existDto1 != null) {
+				    System.out.println("existdto............" + existDto1.getId());
+				} else {
+				    System.out.println("existdto............ null (no existing record)");
+				}
 				
 				if (existDto1 != null && dto.getId() != existDto1.getId()) {
 					res.addMessage(dto.getLabel() + " already exist");

@@ -41,6 +41,8 @@ import { CustomerlistComponent } from './customer/customer-list.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { ReportComponent } from './report/report.component';
 import { ReportListComponent } from './report/report-list.component';
+import { VehicalComponent } from './vehical/vehical.component';
+import { VehicalListComponent } from './vehical/vehical-list.component';
 
 
 
@@ -200,6 +202,23 @@ const routes: Routes = [
     {
         path: 'reportlist',
         component: ReportListComponent
+
+    },
+
+     //==================VEHICAL======================
+    {
+        path: 'vehical',
+        component: VehicalComponent
+
+    },
+    {
+        path: 'vehical/:id',
+        component: VehicalComponent
+
+    },
+    {
+        path: 'vehicallist',
+        component: VehicalListComponent
 
     },
 

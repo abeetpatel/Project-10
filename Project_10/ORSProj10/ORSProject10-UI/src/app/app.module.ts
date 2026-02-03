@@ -60,6 +60,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeListComponent } from './employee/employee-list.component';
 import { ReportComponent } from './report/report.component';
 import { ReportListComponent } from './report/report-list.component';
+import { VehicalComponent } from './vehical/vehical.component';
+import { VehicalListComponent } from './vehical/vehical-list.component';
 
 
 
@@ -117,6 +119,8 @@ export function myHttpLoader(http: HttpClient) {
     EmployeeListComponent,
     ReportComponent,
     ReportListComponent,
+    VehicalComponent,
+    VehicalListComponent,
     
   ],
   imports: [

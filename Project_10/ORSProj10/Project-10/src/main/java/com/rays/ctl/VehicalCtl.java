@@ -1,6 +1,5 @@
 package com.rays.ctl;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +11,23 @@ import com.rays.common.BaseCtl;
 import com.rays.common.DropdownList;
 import com.rays.common.ORSResponse;
 import com.rays.dto.ReportDTO;
-import com.rays.form.ReportForm;
-import com.rays.service.ReportServiceInt;
+import com.rays.dto.VehicalDTO;
+import com.rays.form.VehicalForm;
+import com.rays.service.VehicalServiceInt;
 
 @RestController
-@RequestMapping(value = "Report")
-public class ReportCtl extends BaseCtl<ReportForm, ReportDTO, ReportServiceInt> {
+@RequestMapping(value = "Vehical")
+public class VehicalCtl extends BaseCtl<VehicalForm, VehicalDTO, VehicalServiceInt> {
 
 	@Autowired
-	ReportServiceInt reportService;
+	VehicalServiceInt vehicalService;
 
 	@GetMapping("/preload")
 	public ORSResponse preload() {
 		ORSResponse res = new ORSResponse(true);
-		ReportDTO dto = new ReportDTO();
-		List<DropdownList> list = reportService.search(dto, userContext);
-		res.addResult("ReportList", list);
+		VehicalDTO dto = new VehicalDTO();
+		List<DropdownList> list = vehicalService.search(dto, userContext);
+		res.addResult("vehicalList", list);
 		return res;
 	}
 
