@@ -49,52 +49,34 @@
   <div class="container-fluid">
     <div class="panel panel-primary" style="padding-top: 73px;">
       <div class="panel-heading">
-        <h1 class="text-primary font-weight-bold">{{ 'Vehicle List' | translate }}</h1>
+        <h1 class="text-primary font-weight-bold">{{ 'Document List' | translate }}</h1>
       </div>
 
       <div class="row search-inputs p-1 justify-content-center g-3">
         <div class="col-sm-2">
-          <input type="text" name="vehicalNo" [(ngModel)]="form.searchParams.vehicalNo" class="form-control"
-            placeholder="{{ 'Enter Vehical No' | translate }}">
-          <span *ngIf="errorMessageVehicalNo" class="alertRedColor">{{ errorMessageVehicalNo}}</span>
+          <input type="text" name="documentName" [(ngModel)]="form.searchParams.documentName" class="form-control"
+            placeholder="{{ 'Enter Document Name' | translate }}">
+          <span *ngIf="errorMessageDocumentName" class="alertRedColor">{{ errorMessageDocumentName}}</span>
+        </div>
+
+       
+
+        <div class="col-sm-2">
+          <input type="date" name="uploadDate" [(ngModel)]="form.searchParams.uploadDate" class="form-control"
+            placeholder="{{ 'Enter Upload Date' | translate }}">
+          <span *ngIf="errorMessageUploadDate" class="alertRedColor">{{ errorMessageUploadDate}}</span>
         </div>
 
         <div class="col-sm-2">
-          <input type="date" name="purchaseDate" [(ngModel)]="form.searchParams.purchaseDate" class="form-control"
-            placeholder="{{ 'Enter Purchase Date' | translate }}">
-          <span *ngIf="errorMessagePurchaseDate" class="alertRedColor">{{ errorMessagePurchaseDate}}</span>
-        </div>
-
-        <div class="col-sm-2">
-          <select class="form-control" name="bodyType"  [(ngModel)]="form.searchParams.bodyType"
+          <select class="form-control" name="documentType"  [(ngModel)]="form.searchParams.documentType"
                   style="cursor: pointer;">
-                  <option [ngValue]="" value="undefined">{{'Please select' | translate }}</option>
-                  <option value="Hatchback">{{'Hatchback' | translate }} </option>
-                  <option value="Sedan">{{'Sedan' | translate }} </option>
-                  <option value="SUV">{{'SUV' | translate }} </option>
-                  <option value="MUV">{{'MUV' | translate }} </option>
-                  <option value="Coupe">{{'Coupe' | translate }} </option>
-                  <option value="Convertible">{{'Convertible' | translate }} </option>
-                  <option value="Estate">{{'Estate' | translate }} </option>
-                  <option value="Pickup Truck">{{'Pickup Truck' | translate }} </option>
-                  <option value="Van">{{'Van' | translate }} </option>
-                  <option value="Bus">{{'Bus' | translate }} </option>
-                </select>
-        </div>
-
-
-        <div class="col-sm-2">
-           <select class="form-control" name="brand"  [(ngModel)]="form.searchParams.brand"
-                  style="cursor: pointer;">
-                  <option [ngValue]="" value="undefined">{{'Please select' | translate }}</option>
-                  <option value="Maruti Suzuki">{{'Maruti Suzuki' | translate }} </option>
-                  <option value="Tata Motors">{{'Tata Motors' | translate }} </option>
-                  <option value="Mahindra">{{'Mahindra' | translate }} </option>
-                  <option value="Hyundai">{{'Hyundai' | translate }} </option>
-                   <option value="Kia">{{'Kia' | translate }} </option>
-                  <option value="Honda">{{'Honda' | translate }} </option>
-                  <option value="Toyota">{{'Toyota' | translate }} </option>
-                  <option value="Moris Garage">{{'Moris Garage' | translate }} </option>
+                   <option [ngValue]="" value="undefined">{{'Please select' | translate }}</option>
+                  <option value="PDF">{{'PDF' | translate }} </option>
+                  <option value="Word Files">{{'Word Files' | translate }} </option>
+                  <option value="Excel Sheets">{{'Excel Sheets' | translate }} </option>
+                  <option value="API Docs">{{'API Docs' | translate }} </option>
+                  <option value="System Reports">{{'System Reports' | translate }} </option>
+                  <option value="Logs">{{'Logs' | translate }} </option>
                 </select>
         </div>
         
@@ -104,8 +86,8 @@
         </div>
 
         <div>
-          <button (click)="forward('/vehical')" type="button" class="btn btn-success w-100">
-            {{ 'Add Vehical' | translate }}
+          <button (click)="forward('/document')" type="button" class="btn btn-success w-100">
+            {{ 'Add Document' | translate }}
           </button>
         </div>
 
@@ -132,10 +114,10 @@
               <th><input type="checkbox" [(ngModel)]="isMasterSel" name="list_name"
                   (change)="checkUncheckAll($event)" /></th>
               <th>{{ 'S.No' | translate }}</th>
-              <th>{{ 'Vehical No' | translate }}</th>
-              <th>{{ 'Body Type' | translate }}</th>
-              <th>{{ 'Brand' | translate }}</th>
-              <th>{{ 'Purchase Date' | translate }}</th>
+              <th>{{ 'Document Name' | translate }}</th>
+              <th>{{ 'Document Type' | translate }}</th>
+              <th>{{ 'File Path' | translate }}</th>
+              <th>{{ 'Upload Date' | translate }}</th>
               <th>{{ 'Edit' | translate }}</th>
             </tr>
           </thead>
@@ -143,13 +125,13 @@
             <tr *ngFor="let m of form.list; let i = index" align="center">
               <td><input type="checkbox" #checkboxes (change)="checklistUpdate()" name="list_name" [id]="m.id" /></td>
               <td>{{ (form.pageNo * 5) + i + 1 }}</td>
-              <td>{{ m.vehicalNo }}</td>
-              <td>{{ m.bodyType }}</td>
-              <td>{{m.brand}}</td>
-              <td>{{ m.purchaseDate | date : 'dd-MM-yyyy' }}</td>
+              <td>{{ m.documentName }}</td>
+              <td>{{ m.documentType }}</td>
+              <td>{{m.filePath}}</td>
+              <td>{{ m.uploadDate | date : 'dd-MM-yyyy' }}</td>
 
               <td>
-                <button class="fa fa-edit text-primary" id="nnn" (click)="forward('/vehical/' +  m.id)">
+                <button class="fa fa-edit text-primary" id="nnn" (click)="forward('/document/' +  m.id)">
                 </button>
               </td>
             </tr>
@@ -161,18 +143,18 @@
             }}</button>
 
           <div>
-            <a class="btn btn-warning mr-1" [routerLink]="['/vehicallist']" (click)="exit()">
+            <a class="btn btn-warning mr-1" [routerLink]="['/documentlist']" (click)="exit()">
               {{ 'Reset' | translate }}
             </a>
           </div>
 
           <div *ngIf="form.list.length == 0">
-            <a class="btn btn-warning mr-1" [routerLink]="['/vehicallist']" (click)="exit()">
+            <a class="btn btn-warning mr-1" [routerLink]="['/documentlist']" (click)="exit()">
               {{ 'Back' | translate }}
             </a>
           </div>
           <button (click)="next()" [disabled]="nextList == 0" class="btn btn-info">{{ 'Next' | translate }}</button>
-        </div>
+        
       </div>
     </div>
   </div>

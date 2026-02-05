@@ -287,6 +287,46 @@
         </div>
       </li>
 
+       <!-- ========================================DOCUMENT======================================  -->
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <font style="color: white">{{ "Document" | translate }}</font>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/document']"><i class="fa fa-calculator"></i> &nbsp;
+            {{ "Add Document" | translate }}</a>
+          <a class="dropdown-item" [routerLink]="['/documentlist']">
+            <i class="fa fa-list"></i> &nbsp;
+            {{
+            "Document
+            List" | translate
+            }}
+          </a>
+        </div>
+      </li>
+
+      <!-- ========================================ATTENDANCE======================================  -->
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <font style="color: white">{{ "Attendance" | translate }}</font>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/attendance']"><i class="fa fa-calculator"></i> &nbsp;
+            {{ "Add Attendance" | translate }}</a>
+          <a class="dropdown-item" [routerLink]="['/attendancelist']">
+            <i class="fa fa-list"></i> &nbsp;
+            {{
+            "Attendance
+            List" | translate
+            }}
+          </a>
+        </div>
+      </li>
+
       <!-- ========================================AFTER LOGIN======================================  -->
 
       <li class="nav-item dropdown" style="padding-left: 5px">

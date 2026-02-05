@@ -43,6 +43,10 @@ import { ReportComponent } from './report/report.component';
 import { ReportListComponent } from './report/report-list.component';
 import { VehicalComponent } from './vehical/vehical.component';
 import { VehicalListComponent } from './vehical/vehical-list.component';
+import { DocumentComponent } from './document/document.component';
+import { DocumentListComponent } from './document/document-list.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { AttendanceListComponent } from './attendance/attendance-list.component';
 
 
 
@@ -219,6 +223,40 @@ const routes: Routes = [
     {
         path: 'vehicallist',
         component: VehicalListComponent
+
+    },
+
+    //==================DOCUMENT======================
+    {
+        path: 'document',
+        component: DocumentComponent
+
+    },
+    {
+        path: 'document/:id',
+        component: DocumentComponent
+
+    },
+    {
+        path: 'documentlist',
+        component: DocumentListComponent
+
+    },
+
+    //==================ATTENDANCE======================
+    {
+        path: 'attendance',
+        component: AttendanceComponent
+
+    },
+    {
+        path: 'attendance/:id',
+        component: AttendanceComponent
+
+    },
+    {
+        path: 'attendancelist',
+        component: AttendanceListComponent
 
     },
 

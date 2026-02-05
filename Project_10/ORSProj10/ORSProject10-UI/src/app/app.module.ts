@@ -62,6 +62,11 @@ import { ReportComponent } from './report/report.component';
 import { ReportListComponent } from './report/report-list.component';
 import { VehicalComponent } from './vehical/vehical.component';
 import { VehicalListComponent } from './vehical/vehical-list.component';
+import { DocumentComponent } from './document/document.component';
+import { DocumentListComponent } from './document/document-list.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { AttendanceListComponent } from './attendance/attendance-list.component';
+
 
 
 
@@ -121,6 +126,10 @@ export function myHttpLoader(http: HttpClient) {
     ReportListComponent,
     VehicalComponent,
     VehicalListComponent,
+    DocumentComponent,
+    DocumentListComponent,
+    AttendanceComponent,
+    AttendanceListComponent
     
   ],
   imports: [

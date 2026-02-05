@@ -34,10 +34,10 @@
         <div class="card-body shadow-lg grad">
           <form name="assetForm">
             <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold" style="text-align: center;">
-              {{ 'Add Vehicle' | translate }}
+              {{ 'Add Attendance' | translate }}
             </h2>
             <h2 *ngIf="form.data.id" class="text-primary font-weight-bold" style="text-align: center;">
-              {{ 'Update Vehicle' | translate }}
+              {{ 'Update Attendance' | translate }}
             </h2>
 
             <!-- Form error messages -->
@@ -54,7 +54,7 @@
 
             <div class="form-group pt-2">
               <label>
-                <b>{{ 'Vehical No' | translate }}</b>
+                <b>{{ 'Person Name' | translate }}</b>
                 <span class="required-field">*</span>
               </label>
 
@@ -63,18 +63,18 @@
                   <div class="input-group-text"><i class="fa fa-file grey-text"></i></div>
                 </div>
 
-                <input type="text"  name="vehicalNo" [(ngModel)]="form.data.vehicalNo" class="form-control"
-                   maxlength="20" pattern="[A-Za-z0-9]+"
-                  placeholder="{{ 'Enter vehical no' | translate }}">
+                <input type="text"  name="personName" [(ngModel)]="form.data.personName" class="form-control"
+                   maxlength="20" 
+                  placeholder="{{ 'Enter Person Name' | translate }}">
               </div>
 
               <!-- Custom error messages from component -->
-              <span *ngIf="form.inputerror.vehicalNo" class="alertRedColor">{{ form.inputerror.vehicalNo }}</span>
+              <span *ngIf="form.inputerror.personName" class="alertRedColor">{{ form.inputerror.personName }}</span>
             </div>
 
             <div class="form-group pt-2">
               <label>
-                <b>{{ 'Body Type' | translate }}</b>
+                <b>{{ 'Attendance Status' | translate }}</b>
                 <span class="required-field">*</span>
               </label>
 
@@ -83,24 +83,22 @@
                   <div class="input-group-text"><i class="fa fa-user grey-text"></i></div>
                 </div>
 
-                <select class="form-control" name="bodyType"  [(ngModel)]="form.data.bodyType"
+                <select class="form-control" name="attendanceStatus"  [(ngModel)]="form.data.attendanceStatus"
                   style="cursor: pointer;">
                   <option [ngValue]="" value="undefined">{{'Please select' | translate }}</option>
-                  <option value="Hatchback">{{'Hatchback' | translate }} </option>
-                  <option value="Sedan">{{'Sedan' | translate }} </option>
-                  <option value="SUV">{{'SUV' | translate }} </option>
-                  <option value="MUV">{{'MUV' | translate }} </option>
-                  <option value="Coupe">{{'Coupe' | translate }} </option>
-                  <option value="Convertible">{{'Convertible' | translate }} </option>
-                  <option value="Estate">{{'Estate' | translate }} </option>
-                  <option value="Pickup Truck">{{'Pickup Truck' | translate }} </option>
-                  <option value="Van">{{'Van' | translate }} </option>
-                  <option value="Bus">{{'Bus' | translate }} </option>
+                  <option value="Present">{{'Present' | translate }} </option>
+                  <option value="Absent">{{'Absent' | translate }} </option>
+                  <option value="Leave">{{'Leave' | translate }} </option>
+                  <option value="Late">{{'Late' | translate }} </option>
+                  <option value="Half Day">{{'Half Day' | translate }} </option>
+                  <option value="Work From Home">{{'Work From Home' | translate }} </option>
+                  <option value="Holiday">{{'Holiday' | translate }} </option>
+                  <option value="On Duty">{{'On Duty' | translate }} </option>
                 </select>
               </div>
 
               <!-- Custom error messages from component -->
-              <span *ngIf="form.inputerror.bodyType" class="alertRedColor">{{ form.inputerror.bodyType }}</span>
+              <span *ngIf="form.inputerror.attendanceStatus" class="alertRedColor">{{ form.inputerror.attendanceStatus }}</span>
             </div> 
 
             
@@ -108,7 +106,7 @@
 
              <div class="form-group pt-2">
               <label>
-                <b>{{ 'Purchase Date' | translate }}</b>
+                <b>{{ 'Attendance Date' | translate }}</b>
                 <span class="required-field">*</span>
               </label>
 
@@ -119,45 +117,31 @@
                   </div>
                 </div>
 
-                <input type="date" name="purchaseDate" [value]="form.data.purchaseDate | date:'yyyy-MM-dd'"
-                 (input)="form.data.purchaseDate=parseDate($event.target.value)" class="form-control"  maxlength="50"
-                  placeholder="{{ 'Enter Purchase Date' | translate }}">
+                <input type="date" name="attendanceDate" [value]="form.data.attendanceDate | date:'yyyy-MM-dd'"
+                 (input)="form.data.attendanceDate=parseDate($event.target.value)" class="form-control"  maxlength="50"
+                  placeholder="{{ 'Enter Attendance Date' | translate }}">
               </div>
 
               <!-- Custom validation messages from component -->
-              <span *ngIf="form.inputerror.purchaseDate" class="alertRedColor">{{ form.inputerror.purchaseDate
+              <span *ngIf="form.inputerror.attendanceDate" class="alertRedColor">{{ form.inputerror.attendanceDate
                 }}</span>
             </div>
 
 
-              <div class="form-group pt-2">
-              <label>
-                <b>{{ 'Brand' | translate }}</b>
-                <span class="required-field">*</span>
-              </label>
-
+             <div style="padding-top:3%">
+            <span class="pt-2"><b>{{'Remarks' | translate}}</b>
+              <span class="required-field"></span></span>
+            <div class="col-sm-12">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-bell grey-text"></i></div>
+                  <div class="input-group-text"><i class="fa fa-bars grey-text"></i> </div>
                 </div>
-
-                <select class="form-control" name="brand"  [(ngModel)]="form.data.brand"
-                  style="cursor: pointer;">
-                  <option [ngValue]="" value="undefined">{{'Please select' | translate }}</option>
-                  <option value="Maruti Suzuki">{{'Maruti Suzuki' | translate }} </option>
-                  <option value="Tata Motors">{{'Tata Motors' | translate }} </option>
-                  <option value="Mahindra">{{'Mahindra' | translate }} </option>
-                  <option value="Hyundai">{{'Hyundai' | translate }} </option>
-                  <option value="Kia">{{'Kia' | translate }} </option>
-                  <option value="Honda">{{'Honda' | translate }} </option>
-                  <option value="Toyota">{{'Toyota' | translate }} </option>
-                  <option value="Moris Garage">{{'Moris Garage' | translate }} </option>
-                </select>
+                <textarea class="form-control" name="remarks" [(ngModel)]="form.data.remarks"
+                  placeholder="{{'Enter Remarks' | translate}}"></textarea>
               </div>
-
-              <!-- Custom error messages from component -->
-              <span *ngIf="form.inputerror.brand" class="alertRedColor">{{ form.inputerror.brand }}</span>
             </div>
+            <span *ngIf="form.inputerror.remarks" class="alertRedColor"> {{form.inputerror.remarks}} </span>
+          </div>
 
 
             <div class="row pt-2 pl-2 pb-3">
@@ -179,7 +163,7 @@
               </div>
 
               <div class="pt-2">
-                <a class="btn btn-warning mr-1" type="button" [routerLink]="['/vehicallist']"
+                <a class="btn btn-warning mr-1" type="button" [routerLink]="['/attendancelist']"
                   style="text-decoration: none; color: white;">
                   {{ 'List' | translate }}
                 </a>
