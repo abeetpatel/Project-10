@@ -12,11 +12,12 @@ import com.rays.common.DropdownList;
 import com.rays.common.ORSResponse;
 import com.rays.common.attachment.AttachmentForm;
 import com.rays.dto.AttendanceDTO;
+import com.rays.form.AttendanceFrom;
 import com.rays.service.AttendanceServiceInt;
 
 @RestController
 @RequestMapping(value = "Attendance")
-public class AttendanceCtl extends BaseCtl<AttachmentForm, AttendanceDTO, AttendanceServiceInt> {	
+public class AttendanceCtl extends BaseCtl<AttendanceFrom, AttendanceDTO, AttendanceServiceInt> {	
 	
 	@Autowired
 	AttendanceServiceInt attendanceService;
