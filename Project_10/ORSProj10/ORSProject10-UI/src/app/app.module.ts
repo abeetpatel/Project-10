@@ -66,6 +66,8 @@ import { DocumentComponent } from './document/document.component';
 import { DocumentListComponent } from './document/document-list.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AttendanceListComponent } from './attendance/attendance-list.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileListComponent } from './profile/profile-list.component';
 
 
 
@@ -129,7 +131,9 @@ export function myHttpLoader(http: HttpClient) {
     DocumentComponent,
     DocumentListComponent,
     AttendanceComponent,
-    AttendanceListComponent
+    AttendanceListComponent,
+    ProfileComponent,
+    ProfileListComponent
     
   ],
   imports: [

@@ -47,6 +47,8 @@ import { DocumentComponent } from './document/document.component';
 import { DocumentListComponent } from './document/document-list.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AttendanceListComponent } from './attendance/attendance-list.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileListComponent } from './profile/profile-list.component';
 
 
 
@@ -257,6 +259,23 @@ const routes: Routes = [
     {
         path: 'attendancelist',
         component: AttendanceListComponent
+
+    },
+
+    //==================PROFILE======================
+    {
+        path: 'profile',
+        component: ProfileComponent
+
+    },
+    {
+        path: 'profile/:id',
+        component: ProfileComponent
+
+    },
+    {
+        path: 'profilelist',
+        component: ProfileListComponent
 
     },
 
