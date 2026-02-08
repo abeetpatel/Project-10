@@ -1,0 +1,165 @@
+<app-navbar></app-navbar>
+
+<style>
+  #nnn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .panel-heading {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-inputs {
+    margin-top: 20px;
+  }
+
+  .search-inputs .form-control,
+  .search-inputs .btn {
+    margin-bottom: 10px;
+  }
+
+  .content-wrapper {
+    background: url('assets/files/teahu.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: auto;
+    height: 105vh;
+    padding: 20px;
+  }
+
+  .table-responsive {
+    margin-top: 20px;
+  }
+
+  .search-inputs .col-sm-2,
+  .search-inputs .col-sm-1 {
+    padding: 0 5px;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+<div class="content-wrapper ">
+  <div class="container-fluid">
+    <div class="panel panel-primary" style="padding-top: 73px;">
+      <div class="panel-heading">
+        <h1 class="text-primary font-weight-bold">{{ 'Audit List' | translate }}</h1>
+      </div>
+
+      <div class="row search-inputs p-1 justify-content-center g-3">
+        <div class="col-sm-2">
+          <input type="text" name="actionType" [(ngModel)]="form.searchParams.actionType" class="form-control"
+            placeholder="{{ 'Enter Action Type' | translate }}">
+          <span *ngIf="errorMessageActionType" class="alertRedColor">{{ errorMessageActionType}}</span>
+        </div>
+
+        <div class="col-sm-2">
+          <input type="date" name="actionTime" [(ngModel)]="form.searchParams.actionTime" class="form-control"
+            placeholder="{{ 'Enter Action Time' | translate }}">
+          <span *ngIf="errorMessageActionTime" class="alertRedColor">{{ errorMessageActionTime}}</span>
+        </div>
+
+        <div class="col-sm-2">
+          <select class="form-control" name="actionResult"  [(ngModel)]="form.searchParams.actionResult"
+                  style="cursor: pointer;">
+                 <option [ngValue]="" value="undefined">{{'Please select' | translate }}</option>
+                  <option value="Success">{{'Success' | translate }} </option>
+                  <option value="Fail">{{'Fail' | translate }} </option>
+                  <option value="Pending">{{'Pending' | translate }} </option>
+                </select>
+        </div>
+
+
+        <div class="col-sm-2">
+          <input type="text" name="actionBy" [(ngModel)]="form.searchParams.actionBy" class="form-control"
+            placeholder="{{ 'Enter Action By' | translate }}">
+          <span *ngIf="errorMessageActionBy" class="alertRedColor">{{ errorMessageActionBy}}</span>
+        </div>
+        
+
+        <div class="col-sm-1">
+          <button (click)="submit()" class="btn btn-primary w-100">{{ 'Search' | translate }}</button>
+        </div>
+
+        <div>
+          <button (click)="forward('/audit')" type="button" class="btn btn-success w-100">
+            {{ 'Add Audit' | translate }}
+          </button>
+        </div>
+
+        <div class="col-sm-1">
+          <button (click)="deleteMany()" class="btn btn-danger w-100">{{ 'Delete' | translate }}</button>
+        </div>
+      </div>
+
+
+      <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ form.message }}
+      </div>
+
+      <div *ngIf="!form.error && form.message != null" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ form.message }}
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-dark  ">
+          <thead class="thead-dark text-uppercase ">
+            <tr align="center">
+              <th><input type="checkbox" [(ngModel)]="isMasterSel" name="list_name"
+                  (change)="checkUncheckAll($event)" /></th>
+              <th>{{ 'S.No' | translate }}</th>
+              <th>{{ 'Action Type' | translate }}</th>
+              <th>{{ 'Action Result' | translate }}</th>
+              <th>{{ 'Action By' | translate }}</th>
+              <th>{{ 'Action Time' | translate }}</th>
+              <th>{{ 'Edit' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of form.list; let i = index" align="center">
+              <td><input type="checkbox" #checkboxes (change)="checklistUpdate()" name="list_name" [id]="m.id" /></td>
+              <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+              <td>{{ m.actionType }}</td>
+              <td>{{ m.actionResult }}</td>
+              <td>{{m.actionBy}}</td>
+              <td>{{ m.actionTime | date : 'dd-MM-yyyy' }}</td>
+
+              <td>
+                <button class="fa fa-edit text-primary" id="nnn" (click)="forward('/audit/' +  m.id)">
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info">{{ 'Previous' | translate
+            }}</button>
+
+          <div>
+            <a class="btn btn-warning mr-1" [routerLink]="['/auditlist']" (click)="exit()">
+              {{ 'Reset' | translate }}
+            </a>
+          </div>
+
+          <div *ngIf="form.list.length == 0">
+            <a class="btn btn-warning mr-1" [routerLink]="['/auditlist']" (click)="exit()">
+              {{ 'Back' | translate }}
+            </a>
+          </div>
+          <button (click)="next()" [disabled]="nextList == 0" class="btn btn-info">{{ 'Next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

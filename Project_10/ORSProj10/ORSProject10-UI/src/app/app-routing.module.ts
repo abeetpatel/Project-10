@@ -49,6 +49,8 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { AttendanceListComponent } from './attendance/attendance-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileListComponent } from './profile/profile-list.component';
+import { AuditComponent } from './audit/audit.component';
+import { AuditListComponent } from './audit/audit-list.component';
 
 
 
@@ -276,6 +278,23 @@ const routes: Routes = [
     {
         path: 'profilelist',
         component: ProfileListComponent
+
+    },
+
+     //==================AUDIT======================
+    {
+        path: 'audit',
+        component: AuditComponent
+
+    },
+    {
+        path: 'audit/:id',
+        component: AuditComponent
+
+    },
+    {
+        path: 'auditlist',
+        component: AuditListComponent
 
     },
 

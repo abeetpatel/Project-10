@@ -24,6 +24,7 @@ export class EndpointServiceService {
   public DOCUMENT = this.SERVER_URL + "/Document";
   public ATTENDANCE = this.SERVER_URL + "/Attendance";
   public PROFILE = this.SERVER_URL + "/Profile";
+  public AUDIT = this.SERVER_URL + "/Audit";
   public JASPERREPORT = this.SERVER_URL + "/Jasper";
 
   public CUSTOMER = this.SERVER_URL + "/Customer";
