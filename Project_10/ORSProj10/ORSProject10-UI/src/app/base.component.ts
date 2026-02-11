@@ -17,7 +17,7 @@ export class BaseCtl implements OnInit {
     deleteMany: null,
     preload: null,
     report: null,
-    address:null
+    address: null
   }
 
   initApi(ep) {
@@ -37,7 +37,7 @@ export class BaseCtl implements OnInit {
   /**
    * Form contains preload data, error/sucess message 
    */
-  public form : any= {
+  public form: any = {
 
     error: false, //error 
     message: null, //error or success message
@@ -88,8 +88,14 @@ export class BaseCtl implements OnInit {
   preload() {
     console.log("preload start")
     var _self = this;
-    this.serviceLocator.httpService.get(_self.api.preload, function (res) {
-      console.log("base list preload",_self.api.preload)
+    this.serviceLocator.httpService.get(_self.api.preload, function (res, err) {
+      console.log("base list preload", _self.api.preload)
+
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
       if (res.success) {
         _self.form.preload = res.result;
       } else {
@@ -99,7 +105,6 @@ export class BaseCtl implements OnInit {
       console.log('FORM', _self.form);
     });
   }
-
   validate() {
     return this.validateForm(this.form.data);
   }
@@ -116,30 +121,46 @@ export class BaseCtl implements OnInit {
   /**
    * Searhs records 
    */
-    search() {
+  search() {
     console.log("search start")
     var _self = this;
-    console.log("Search Form", _self.form.searchParams);
-    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res) {
 
+    this.serviceLocator.httpService.post(
+      _self.api.search + "/" + _self.form.pageNo,
+      _self.form.searchParams,
 
-      if (res.success) {
-        _self.form.list = res.result.data;
-        _self.nextList = res.result.nextList;
+      function (res, err) {
 
-        
-        if (_self.form.list.length == 0) {
-          
-          _self.form.message = "No record found"; 
-          _self.form.error = true;
+        // 🔴 ERROR case (DB down / 503 / etc)
+        if (err) {
+          _self.form.message = err.message;
+          _self.form.error = true;     // ← THIS makes it red
+          return;
         }
-        console.log("List Size", _self.form.list.length);
-      } else {
-        _self.form.error = false;
-        _self.form.message = res.result.message;
+
+        // ✅ SUCCESS case
+        if (res.success) {
+
+          _self.form.list = res.result.data;
+          _self.nextList = res.result.nextList;
+
+          if (_self.form.list.length == 0) {
+            _self.form.message = "No record found";
+            _self.form.error = true;
+          } else {
+            // _self.form.message = "";
+            _self.form.error = false;
+          }
+
+        } else {
+          // business validation error from backend
+          _self.form.message = res.result.message;
+          _self.form.error = true;   // also red
+        }
+
+        console.log('FORM', _self.form);
       }
-      console.log('FORM', _self.form);
-    });
+    );
   }
 
   searchOperation(operation: String) {
@@ -153,7 +174,7 @@ export class BaseCtl implements OnInit {
         _self.form.message = null;
         _self.form.error = false;
       }
-      
+
 
       if (res.success) {
         _self.form.list = res.result.data;
@@ -177,16 +198,25 @@ export class BaseCtl implements OnInit {
 
     var _self = this;
     console.log('Inside display method');
-    this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res) {
-     _self.form.data.id=0;
-       if (res.success) {
-         _self.populateForm(_self.form.data, res.result.data);
-       }
-       else {
+    this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res, err) {
+      _self.form.data.id = 0;
+
+      // 🔴 ERROR case (DB down / 503 / etc)
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
+
+      if (res.success) {
+        _self.populateForm(_self.form.data, res.result.data);
+      }
+      else {
         _self.form.error = true;
         _self.form.message = res.result.message;
       }
       console.log('FORM', _self.form);
+
     });
   }
 
@@ -208,21 +238,26 @@ export class BaseCtl implements OnInit {
 
 
   submit() {
-   
     var _self = this;
 
     console.log(this.form + "submit running start");
-    console.log("form data going to be submit" + "..... "+ this.form.data.id);
+    console.log("form data going to be submit" + this.form.data);
     //  console.log("form data going to be submit" + this.studentId);
-    this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res) {
+    this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res, err) {
       _self.form.message = '';
-       _self.form.inputerror = {};
+      _self.form.inputerror = {};
 
-       console.log('dataa ===== > ', res.result.data);
+      console.log('dataa ===== > ', res.result.data);
+
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
 
       if (res.success) {
         _self.form.message = "Data is saved";
-        
+
         if (_self.form.data.id && _self.form.data.id > 0) {
           _self.form.data.id = res.result.data;
         } else {
@@ -239,7 +274,7 @@ export class BaseCtl implements OnInit {
         }
         _self.form.message = res.result.message;
       }
-     // _self.form.data.id = res.result.data.id;
+      // _self.form.data.id = res.result.data.id;
       console.log('FORM', _self.form);
     });
   }
@@ -261,13 +296,18 @@ export class BaseCtl implements OnInit {
     });
   }
 
-    deleteMany(id, callback?) {
+  deleteMany(id, callback?) {
     var _self = this;
-    this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res) {
+    this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res, err) {
       if (res.success) {
         _self.form.message = "Data is deleted";
-        
-        
+
+        if (err) {
+          _self.form.message = err.message;
+          _self.form.error = true;     // ← THIS makes it red
+          return;
+        }
+
 
         if (callback) {
           console.log('Response Success and now Calling Callback');
@@ -275,7 +315,7 @@ export class BaseCtl implements OnInit {
           console.log("List ::  ", + res.data);
           console.log("List Size", _self.form.list.length);
           //  callback();       
-          
+
         }
       } else {
         _self.form.error = true;
@@ -283,6 +323,7 @@ export class BaseCtl implements OnInit {
       }
     });
   }
+
 
 
   generateReport() {
@@ -310,19 +351,19 @@ export class BaseCtl implements OnInit {
     console.log(page + '--->>page value');
     this.serviceLocator.forward(page);
   }
-  
+
   filterInputD(event: KeyboardEvent, errorField: string, maxLength: number): void {
     const charCode = event.which ? event.which : event.keyCode;
     const charStr = String.fromCharCode(charCode);
     const inputElement = event.target as HTMLInputElement;
     let input: string = inputElement.value;
-  
+
     // Regular expressions
     const allowedChars = /^[0-9.]$/;
     const hasDot = input.includes('.');
     const dotPosition = input.indexOf('.');
     const decimalPart = input.substring(dotPosition + 1);
-  
+
     // Handle dot key
     if (charCode === 190 || charCode === 46) { // Dot key for different browsers
       if (hasDot) {
@@ -333,14 +374,14 @@ export class BaseCtl implements OnInit {
       // Allow the dot and exit
       return;
     }
-  
+
     // Check if the typed character is allowed
     if (!allowedChars.test(charStr) && charCode !== 8 && charCode !== 32) {
       event.preventDefault();
       this[errorField] = 'Only numbers and one dot are allowed.';
       return;
     }
-  
+
     // Check decimal places
     if (hasDot) {
       if (charCode !== 8 && decimalPart.length >= 2) {
@@ -349,25 +390,25 @@ export class BaseCtl implements OnInit {
         return;
       }
     }
-  
+
     // Handle input length
     if (input.length >= maxLength && charCode !== 8) {
       event.preventDefault();
       this[errorField] = `Only ${maxLength} characters are allowed.`;
       return;
     }
-  
+
     // Clear error message if input is valid
     this[errorField] = '';
   }
   filterInputS(event: KeyboardEvent, errorField: string, maxLength: number, type: string): void {
     const charCode = event.which ? event.which : event.keyCode;
-    console.log('charCode=',charCode);
+    console.log('charCode=', charCode);
     const charStr = String.fromCharCode(charCode);
     let allowedChars: RegExp;
     let errorMsg: string, lerrorMsg: string;
 
-     switch (type) {
+    switch (type) {
       case 'char':
         allowedChars = /^[a-zA-Z\s.]$/;
         errorMsg = 'Only letters are allowed.';
@@ -398,7 +439,7 @@ export class BaseCtl implements OnInit {
 
   filterInput(event: KeyboardEvent, errorField: string, maxLength: number, type: string): void {
     const charCode = event.which ? event.which : event.keyCode;
-    console.log('charCode=',charCode);
+    console.log('charCode=', charCode);
     const charStr = String.fromCharCode(charCode);
     let allowedChars: RegExp;
     let errorMsg: string, lerrorMsg: string;
@@ -414,7 +455,7 @@ export class BaseCtl implements OnInit {
         errorMsg = 'Only numbers are allowed.';
         lerrorMsg = 'digits';
         break;
-     
+
       default:
         allowedChars = /^[a-zA-Z0-9\s.-]+$/;
         errorMsg = 'Only alphanumeric chars are allowed.';
@@ -448,7 +489,7 @@ export class BaseCtl implements OnInit {
     console.log('Input:', input);
   }
 
-  
+
 
   findSelValueByKey(selKey: any, preloadList: { key: number; value: string }[]): string {
     if (preloadList) {
@@ -460,14 +501,14 @@ export class BaseCtl implements OnInit {
     }
     return '';
   }
-  
-  
+
+
   parseDate(dateString: string): Date {
     if (dateString) {
       return new Date(dateString);
     }
     return null;
   }
-  
+
 
 }

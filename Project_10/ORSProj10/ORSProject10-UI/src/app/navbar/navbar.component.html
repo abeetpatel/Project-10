@@ -367,6 +367,47 @@
         </div>
       </li>
 
+       <!-- ========================================LOCATION======================================  -->
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <font style="color: white">{{ "Location" | translate }}</font>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/location']"><i class="fa fa-calculator"></i> &nbsp;
+            {{ "Add Location" | translate }}</a>
+          <a class="dropdown-item" [routerLink]="['/locationlist']">
+            <i class="fa fa-list"></i> &nbsp;
+            {{
+            "Location
+            List" | translate
+            }}
+          </a>
+        </div>
+      </li>
+
+       <!-- ========================================ACTIVITY======================================  -->
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <font style="color: white">{{ "Activity" | translate }}</font>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/activity']"><i class="fa fa-calculator"></i> &nbsp;
+            {{ "Add Activity" | translate }}</a>
+          <a class="dropdown-item" [routerLink]="['/activitylist']">
+            <i class="fa fa-list"></i> &nbsp;
+            {{
+            "Activity
+            List" | translate
+            }}
+          </a>
+        </div>
+      </li>
+
+
       <!-- ========================================AFTER LOGIN======================================  -->
 
       <li class="nav-item dropdown" style="padding-left: 5px">

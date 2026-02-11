@@ -70,6 +70,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileListComponent } from './profile/profile-list.component';
 import { AuditComponent } from './audit/audit.component';
 import { AuditListComponent } from './audit/audit-list.component';
+import { LocationComponent } from './location/location.component';
+import { LocationListComponent } from './location/location-list.component';
+import { ActivityComponent } from './activity/activity.component';
+import { ActivityListComponent } from './activity/activity-list.component';
 
 
 
@@ -137,7 +141,11 @@ export function myHttpLoader(http: HttpClient) {
     ProfileComponent,
     ProfileListComponent,
     AuditComponent,
-    AuditListComponent
+    AuditListComponent,
+    LocationComponent,
+    LocationListComponent,
+    ActivityComponent,
+    ActivityListComponent
     
   ],
   imports: [

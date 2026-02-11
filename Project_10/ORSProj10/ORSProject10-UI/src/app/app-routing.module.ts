@@ -51,6 +51,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileListComponent } from './profile/profile-list.component';
 import { AuditComponent } from './audit/audit.component';
 import { AuditListComponent } from './audit/audit-list.component';
+import { LocationComponent } from './location/location.component';
+import { LocationListComponent } from './location/location-list.component';
+import { ActivityComponent } from './activity/activity.component';
+import { ActivityListComponent } from './activity/activity-list.component';
 
 
 
@@ -295,6 +299,41 @@ const routes: Routes = [
     {
         path: 'auditlist',
         component: AuditListComponent
+
+    },
+
+      //==================LOCATION======================
+    {
+        path: 'location',
+        component: LocationComponent
+
+    },
+    {
+        path: 'location/:id',
+        component: LocationComponent
+
+    },
+    {
+        path: 'locationlist',
+        component: LocationListComponent
+
+    },
+
+    
+     //==================ACTIVITY======================
+    {
+        path: 'activity',
+        component: ActivityComponent
+
+    },
+    {
+        path: 'activity/:id',
+        component: ActivityComponent
+
+    },
+    {
+        path: 'activitylist',
+        component: ActivityListComponent
 
     },
 

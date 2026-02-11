@@ -45,6 +45,15 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             {{'Invalid ID or Password' | translate}}
           </div>
+
+          <div *ngIf="form.error && form.message && form.message != 'Invalid ID or Password'
+                  && form.message != 'Your Session has been Expired! Please Re-Login'"
+                class="alert alert-danger alert-dismissible">
+
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+                     {{ form.message }}
+          </div>
+
           <div *ngIf="form.error==false && form.message == 'Logout Successfully'"
             class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
