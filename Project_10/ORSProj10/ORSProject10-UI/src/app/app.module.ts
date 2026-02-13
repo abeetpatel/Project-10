@@ -74,6 +74,8 @@ import { LocationComponent } from './location/location.component';
 import { LocationListComponent } from './location/location-list.component';
 import { ActivityComponent } from './activity/activity.component';
 import { ActivityListComponent } from './activity/activity-list.component';
+import { SupportComponent } from './support/support.component';
+import { SupportListComponent } from './support/support-list.component';
 
 
 
@@ -145,7 +147,9 @@ export function myHttpLoader(http: HttpClient) {
     LocationComponent,
     LocationListComponent,
     ActivityComponent,
-    ActivityListComponent
+    ActivityListComponent,
+    SupportComponent,
+    SupportListComponent
     
   ],
   imports: [
